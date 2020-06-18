@@ -1,4 +1,4 @@
-var servidor = 'http://localhost:8080';
+var servidor = 'http://localhost:3000';
 $(document).ready(function() {
     var controladorRecomendaciones = new ControladorRecomendaciones();
     //cuando el documento esta listo se inicializan las preguntas y se le da funcionalidad a los botones
@@ -94,7 +94,8 @@ function ControladorRecomendaciones() {
 
     this.pedirRecomendacion = function() {
 
-        var self = this;
+		var self = this;
+		console.log(this);
 
         //se setean los parametros correspondientes para luego ser enviados al servidor.
         var query_params = {};
@@ -112,19 +113,20 @@ function ControladorRecomendaciones() {
             query_params.puntuacion = this.puntuacion;
 
         if (Object.keys(query_params).length !== 0) {
-            var query = $.param(query_params);
+            var queryURL = $.param(query_params);
             var ruta = "/peliculas/recomendacion?"
         } else {
             var ruta = "/peliculas/recomendacion";
-            var query = "";
+            var queryURL = "";
         }
-
+		console.log('hasta aqui estoy vivo!');
         //se realiza el pedido de recomendacion al backend
-        $.getJSON(servidor + ruta + query,
+        $.getJSON(servidor + ruta + queryURL,
             function(data) {
                 //la respuesta del backend va a ser un array del peliculas. Antes de guardar ese array mezclamos su contenido
                 //para que no siempre se muestren las peliculas en el mismo
-                var peliculas_desordenadas = self.desordenarArray(data.peliculas);
+				console.log(data.peliculas);
+				var peliculas_desordenadas = self.desordenarArray(data.peliculas);
                 //se guardan las peliculas desordenadas
                 self.resultados = peliculas_desordenadas;
                 // se ejecuta la funcion seleccionarPelicula() 

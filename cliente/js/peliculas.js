@@ -1,5 +1,6 @@
 //ip y puerto al que se le realizaran los pedidos
-var servidor = 'http://localhost:8080';
+var servidor = 'http://localhost:3000';
+
 $(document).ready(function() {
     //se hace el pedido al backend de todos los generos para cargalos en el listado de géneros
     $.getJSON(servidor + "/generos",
@@ -66,11 +67,11 @@ function ControladorPeliculas() {
             //el value de cada opcion de la lista de seleccion de "Ordenar por" esta formado por:
             //nombre de la columna por la que se va a ordenar - tipo de orden (descendente o ascendente)
             //aca se divide el value de la opcion seleccionada en dos campos, la columna orden y el tipo de orden
-            var orden_array = orden.split("-");
+            var orden_array = orden.split("-"); //.split() divide el string en un array
             query_params.columna_orden = orden_array[0];
             query_params.tipo_orden = orden_array[1];
 
-            var query = $.param(query_params);
+            var query = $.param(query_params); //Esto permite que el array de valores pueda ser incrustado en la URL que se envia en el pedido al servidor
 
             //se hace el pedido al backend de las peliculas
             $.getJSON(servidor + "/peliculas?" + query,

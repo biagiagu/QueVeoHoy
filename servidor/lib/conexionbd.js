@@ -1,12 +1,12 @@
-var mysql      = require('mysql');
+var mysql = require('mysql');
 
-var connection = mysql.createConnection({
-  host     : 
-  port     : 
-  user     : 
-  password : 
-  database : 
+var connectionDB = mysql.createConnection({
+  host     : 'rds-mysql-10mintutorial.cjub9oocoi8n.us-east-1.rds.amazonaws.com',
+  port     : '3306',
+  user     : 'masterUsername',
+  password : 'P0r0t4W3b',
+  database : 'queveohoy'
 });
 
-module.exports = connection;
+module.exports = connectionDB;
 
